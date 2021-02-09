@@ -15,8 +15,6 @@ IF ERRORLEVEL 1 (
 
 :RUN_UNITY_BATCHMODE
 ECHO Attempting to open Unity in Batchmode...
-PAUSE
 SET UnityPath="D:/Programs/Unity/2019.4.19f1/Editor/Unity.exe"
 SET StartupPath="D:\GIT\ARFolio\ARFolioBundler"
-PAUSE
 %UnityPath% -batchmode -quit -projectPath %StartupPath% -executeMethod CreateFolio.OnPreprocessAsset
