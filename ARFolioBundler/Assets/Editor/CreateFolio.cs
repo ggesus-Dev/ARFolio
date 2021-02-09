@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 
-public class PrepareBatch : AssetPostprocessor {
+public class CreateFolio : AssetPostprocessor {
     // Before any asset is imported
     static void OnPreprocessAsset() {
         // if(!Application.isBatchMode) return;
