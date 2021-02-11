@@ -24,6 +24,7 @@ public class ListFolios : MonoBehaviour {
         }
         
         GameObject  _btnPrefab = (GameObject)Resources.Load("Prefabs/BtnFolioOption");
+        Transform   _parent = gameObject.transform.GetChild(0).GetChild(0);
         float       _xbuffer = 20f, 
                     _ybuffer = 20f,
                     _btnWidth = _btnPrefab.GetComponent<RectTransform>().rect.width, 
@@ -33,8 +34,8 @@ public class ListFolios : MonoBehaviour {
         for(int i = 0; i < _files.Length; i++) {
             if(_files[i].EndsWith(".fd")) {
                 Debug.Log(_files[i]);
-                Vector3 _pos = new Vector3(100f + _xbuffer + (i + _btnWidth), 100f + _ybuffer + (i * _btnHeight), 0);
-                _folioList.Add(Instantiate(_btnPrefab, _pos, Quaternion.identity, this.transform));
+                Vector3 _pos = new Vector3((_btnWidth * i) + (_xbuffer * (i + 1)), 100f + _ybuffer, 0);
+                _folioList.Add(Instantiate(_btnPrefab, _pos, Quaternion.identity, _parent));
             }
         }
 
