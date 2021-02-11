@@ -33,7 +33,7 @@ public class ListFolios : MonoBehaviour {
         for(int i = 0; i < _files.Length; i++) {
             if(_files[i].EndsWith(".fd")) {
                 Debug.Log(_files[i]);
-                Vector3 _pos = new Vector3(100f + _xbuffer * (i + _btnWidth), 100f + _ybuffer * (i + _btnHeight), 0);
+                Vector3 _pos = new Vector3(100f + _xbuffer + (i + _btnWidth), 100f + _ybuffer + (i * _btnHeight), 0);
                 _folioList.Add(Instantiate(_btnPrefab, _pos, Quaternion.identity, this.transform));
             }
         }
