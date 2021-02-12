@@ -9,11 +9,11 @@ public class CreateFolio : AssetPostprocessor {
         // if(!Application.isBatchMode) return;
         if(!UnityEditorInternal.InternalEditorUtility.inBatchMode) return;
 
-        bool _debug = false;
+        bool _debug = true;
         string _folioPath = "Assets/Test";
         string _outputPath = "Assets/LocalDB";
         string _file = "";
-        string _name = "ggesus-folio";
+        string _name = "lilia-folio";
         string[] _files = Directory.GetFiles(_folioPath);
         // user information
 
