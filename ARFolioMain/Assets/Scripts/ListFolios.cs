@@ -43,14 +43,10 @@ public class ListFolios : MonoBehaviour {
     void drawButtons() {
         GameObject  _btnPrefab = (GameObject)Resources.Load("Prefabs/BtnFolioOption");
         Transform   _parent = gameObject.transform.GetChild(0).GetChild(0);
-        float       _xbuffer = 20f, 
-                    _ybuffer = 20f,
-                    _btnWidth = _btnPrefab.GetComponent<RectTransform>().rect.width, 
-                    _btnHeight = _btnPrefab.GetComponent<RectTransform>().rect.height;
 
-        for(int i = 0; i < _folioList.Count; i++) {
-            Vector3 _pos = new Vector3((_btnWidth * i) + (_xbuffer * (i + 1)), 100f + _ybuffer, 0);
-            _optBtnList.Add(Instantiate(_btnPrefab, _pos, Quaternion.identity, _parent));
+        //_folioList.Count
+        for(int i = 0; i < 30; i++) {
+            _optBtnList.Add(Instantiate(_btnPrefab, Vector3.zero, Quaternion.identity, _parent));
         }
     }
 }
