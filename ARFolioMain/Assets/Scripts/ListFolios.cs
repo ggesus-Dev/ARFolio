@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ListFolios : MonoBehaviour {
     public  GameObject          activeFolio;
@@ -31,7 +32,7 @@ public class ListFolios : MonoBehaviour {
     // Scan for available folios and add them to list
     void checkFolios(string path) {
         string[] _files = Directory.GetFiles(path);
-        _folioList.Clear();
+        _folioList.Clear();                         // if need to redraw
 
         for(int i = 0; i < _files.Length; i++) {
             if(_files[i].EndsWith(".fd")) 
@@ -41,12 +42,13 @@ public class ListFolios : MonoBehaviour {
 
     // Draw buttons for each found folio
     void drawButtons() {
-        GameObject  _btnPrefab = (GameObject)Resources.Load("Prefabs/BtnFolioOption");
-        Transform   _parent = gameObject.transform.GetChild(0).GetChild(0);
+        GameObject _btnPrefab = (GameObject)Resources.Load("Prefabs/BtnFolioOption");
+        Transform _parent = gameObject.transform.GetChild(0).GetChild(0);
+        _optBtnList.Clear();                                                                        // if need to redraw
 
-        //_folioList.Count
-        for(int i = 0; i < 30; i++) {
-            _optBtnList.Add(Instantiate(_btnPrefab, Vector3.zero, Quaternion.identity, _parent));
+        for(int i = 0; i < _folioList.Count; i++) {
+            _optBtnList.Add(Instantiate(_btnPrefab, Vector3.zero, Quaternion.identity, _parent));   // Vector3.zero because content component will adjust positions
+            _optBtnList[i].GetComponentInChildren<Text>().text = _folioList[i];                     // change text to name
         }
     }
 }
