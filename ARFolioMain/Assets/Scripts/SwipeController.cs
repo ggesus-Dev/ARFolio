@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class TouchController : MonoBehaviour {
+public class SwipeController : MonoBehaviour {
     [SerializeField]
     private float _minDistance = 10f;
+    [SerializeField]
+    private Vector2 _startPos, _endPos;
+
     public bool _detectOnRelease = false; 
-    private Vector2 _startPos, _currentPos, _endPos;
     public Vector2 activeBetweenStartPoint, activeBetweenEndPoint;
 
     // thanks to Jason Weimann and whoever he took parts from for SendSwipe function
