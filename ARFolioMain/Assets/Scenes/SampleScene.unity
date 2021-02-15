@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 38303493}
   - component: {fileID: 38303492}
   - component: {fileID: 38303491}
+  - component: {fileID: 38303495}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -300,6 +301,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &38303495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38303490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d17b7343e86c1643bfc09d6752f2c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minDistance: 10
+  _startPos: {x: 0, y: 0}
+  _endPos: {x: 0, y: 0}
+  _detectOnRelease: 0
 --- !u!1 &70042252
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +507,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 40
     m_Right: 40
-    m_Top: 100
+    m_Top: 40
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 20
@@ -958,6 +975,7 @@ GameObject:
   - component: {fileID: 1790695274}
   - component: {fileID: 1790695273}
   - component: {fileID: 1790695272}
+  - component: {fileID: 1790695276}
   m_Layer: 5
   m_Name: FolioSelection
   m_TagString: Untagged
@@ -1066,6 +1084,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790695270}
   m_CullTransparentMesh: 0
+--- !u!114 &1790695276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790695270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b8684eb0659eb438e37335abcfd3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeBetweenStartPoint: {x: 0, y: 0}
+  activeBetweenEndPoint: {x: 0, y: 0}
 --- !u!1 &1884845190
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ public class SwipeController : MonoBehaviour {
     private Vector2 _startPos, _endPos;
 
     public bool _detectOnRelease = false; 
-    public Vector2 activeBetweenStartPoint, activeBetweenEndPoint;
 
     // thanks to Jason Weimann and whoever he took parts from for SendSwipe function
     public struct SwipeData {
@@ -28,7 +27,7 @@ public class SwipeController : MonoBehaviour {
 
     public static event Action<SwipeData> onSwipe = delegate{};     // won't return a value
 
-    void Update() {
+    private void Update() {
         if(Input.touchCount > 0) {
             Touch _touch = Input.GetTouch(0);
 
