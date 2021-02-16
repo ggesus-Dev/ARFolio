@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class SwipeController : MonoBehaviour {
     [SerializeField]
-    private float _minDistance = 10f;
+    private float _minDistance = 100f;
     [SerializeField]
     private Vector2 _startPos, _endPos;
 
-    public bool _detectOnRelease = false; 
+    public bool _detectOnRelease = true; 
 
     // thanks to Jason Weimann and whoever he took parts from for SendSwipe function
     public struct SwipeData {
