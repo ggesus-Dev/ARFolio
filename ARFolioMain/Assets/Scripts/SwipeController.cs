@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SwipeController : MonoBehaviour {
     [SerializeField]
-    private float _minDistance = 100f;
+    private float _minDistance = 300f;
     [SerializeField]
     private Vector2 _startPos, _endPos;
 
@@ -53,7 +53,7 @@ public class SwipeController : MonoBehaviour {
     }
 
     private void getSwipeData() {
-        float _horDistance = Mathf.Abs(_startPos.x - _endPos.y);
+        float _horDistance = Mathf.Abs(_startPos.x - _endPos.x);
         float _verDistance = Mathf.Abs(_startPos.y - _endPos.y);
         if(checkSwipe(_horDistance, _verDistance)) {
             SwipeDirection _dir;                    // direction user swiped in
