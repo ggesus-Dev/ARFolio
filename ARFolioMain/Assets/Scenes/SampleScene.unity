@@ -329,8 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b8684eb0659eb438e37335abcfd3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeBetweenStartPoint: {x: 0, y: 0}
-  activeBetweenEndPoint: {x: 0, y: 500}
+  screenRes: {x: 0, y: 0}
   _easeType: 14
 --- !u!1 &223974226
 GameObject:
