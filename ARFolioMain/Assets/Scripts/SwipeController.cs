@@ -9,7 +9,7 @@ public class SwipeController : MonoBehaviour {
     [SerializeField]
     private Vector2 _startPos, _endPos;
 
-    public bool _detectOnRelease = true; 
+    private bool _detectOnRelease = true; 
 
     // thanks to Jason Weimann and whoever he took parts from for SendSwipe function
     public struct SwipeData {
@@ -41,29 +41,8 @@ public class SwipeController : MonoBehaviour {
                     break;
                 case TouchPhase.Ended:
                     _endPos = _touch.position;
+                    getSwipeData();
                     break;
-            }
-
-            float _horDistance = Mathf.Abs(_startPos.x - _endPos.y);
-            float _verDistance = Mathf.Abs(_startPos.y - _endPos.y);
-            if(checkSwipe(_horDistance, _verDistance)) {
-                SwipeDirection _dir;                    // direction user swiped in
-            
-                if(_verDistance > _horDistance) {       // if it was a vertical swipe
-                    Debug.Log("Vertical Swipe");
-                    
-                    if(_endPos.y > _startPos.y) 
-                        _dir = SwipeDirection.UP; else _dir = SwipeDirection.DOWN;      // if our end position is greater than our start, direction is up
-                } else {
-                    Debug.Log("Horizontal Swipe");
-
-                    if(_endPos.x > _startPos.x)
-                        _dir = SwipeDirection.LEFT; else _dir = SwipeDirection.RIGHT;
-                }
-
-                sendSwipe(_dir);
-            } else {
-                Debug.Log("Tapped screen");
             }
         }
     }
@@ -71,6 +50,30 @@ public class SwipeController : MonoBehaviour {
     private bool checkSwipe(float horDistance, float verDistance) {
         if(verDistance > _minDistance || horDistance > _minDistance) return true;       // swiped
         return false;                                                                   // treat as tap
+    }
+
+    private void getSwipeData() {
+        float _horDistance = Mathf.Abs(_startPos.x - _endPos.y);
+        float _verDistance = Mathf.Abs(_startPos.y - _endPos.y);
+        if(checkSwipe(_horDistance, _verDistance)) {
+            SwipeDirection _dir;                    // direction user swiped in
+        
+            if(_verDistance > _horDistance) {       // if it was a vertical swipe
+                Debug.Log("Vertical Swipe");
+                
+                if(_endPos.y > _startPos.y) 
+                    _dir = SwipeDirection.UP; else _dir = SwipeDirection.DOWN;      // if our end position is greater than our start, direction is up
+            } else {
+                Debug.Log("Horizontal Swipe");
+
+                if(_endPos.x > _startPos.x)
+                    _dir = SwipeDirection.LEFT; else _dir = SwipeDirection.RIGHT;
+            }
+
+            sendSwipe(_dir);
+        } else {
+            Debug.Log("Tapped screen");
+        }
     }
 
     private void sendSwipe(SwipeDirection dir) {
