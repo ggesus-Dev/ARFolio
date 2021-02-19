@@ -445,7 +445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5fc0224c9cd7445bf24db015c3149f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeFolio: {fileID: 0}
+  folioActive: {fileID: 0}
+  folioAssets: []
+  assetActive: {fileID: 0}
+  _assetObject: {fileID: 0}
 --- !u!1 &8668789806127528511
 GameObject:
   m_ObjectHideFlags: 0
