@@ -5,9 +5,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ListFolios : MonoBehaviour {
-    public  GameObject          activeFolio;
+    public  AssetBundle         folioActive;
+    public  string[]            folioAssets;
+    public  Object              assetActive;
     private List<string>        _folioList = new List<string>();
     private List<GameObject>    _optBtnList = new List<GameObject>();
+    private Text                _debugText;
+    
+    [SerializeField]
+    private GameObject          _assetObject;
 
     void Awake() {
         // What platform are we on
@@ -25,6 +31,8 @@ public class ListFolios : MonoBehaviour {
             return;                                 // dont need to continue
         }
         
+        _debugText = transform.parent.GetChild(0).gameObject.GetComponent<Text>();
+
         checkFolios(_path);
         drawButtons();
     }
@@ -50,5 +58,26 @@ public class ListFolios : MonoBehaviour {
             _optBtnList.Add(Instantiate(_btnPrefab, Vector3.zero, Quaternion.identity, _parent));   // Vector3.zero because content component will adjust positions
             _optBtnList[i].GetComponentInChildren<Text>().text = _folioList[i];                     // change text to name
         }
+    }
+
+    private void openFolio() {
+        if(_folioList.Count == 0) return;                                       // there is nothing to load
+
+        folioActive = AssetBundle.LoadFromFile(_folioList[0]);                  // make this open last known folio
+        folioAssets = folioActive.GetAllAssetNames();                           // store contents in array
+        assetActive = folioActive.LoadAsset(folioAssets[0]);        // load first asset
+        
+        GameObject _testFrame = (GameObject)Resources.Load("Prefabs/testFrame");
+
+        _debugText.GetComponent<Text>().text = $"Opened {_folioList[0]}";
+
+        if(assetActive.GetType() == typeof(Texture2D)) {                        // png or jpg
+			Mesh _newMesh = _testFrame.GetComponent<MeshFilter>().sharedMesh;		// assign mesh as the frame's mesh
+			Texture2D _newTex  = (Texture2D)assetActive;						// convert to Texture2D and assign it
+			
+			_assetObject.GetComponent<MeshFilter>().mesh = _newMesh;	// pass it over to the controller
+			_assetObject.GetComponent<MeshRenderer>().material.SetTexture("_myTexture", _newTex);		// pass it 
+		}
+
     }
 }
