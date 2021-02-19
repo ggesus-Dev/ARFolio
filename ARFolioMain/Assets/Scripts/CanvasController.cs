@@ -18,7 +18,10 @@ public class CanvasController : MonoBehaviour {
     # if UNITY_EDITOR
     private void Update() {
         if(Input.GetMouseButtonDown(0)) {
-            if(_mySelectionView == null) selectionController(true); else selectionController(false);
+            if(_mySelectionView == null && Input.mousePosition.y < screenRes.y / 3) 
+                selectionController(true); 
+            else if(_mySelectionView != null && Input.mousePosition.y > screenRes.y / 3) 
+                selectionController(false);
         }
     }
     # endif
