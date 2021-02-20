@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ListFolios : MonoBehaviour {
     public  AssetBundle         folioActive;
     public  string[]            folioAssets;
-    public  Object              assetActive;
+    public  GameObject          assetActive;
     private List<string>        _folioList = new List<string>();
     private List<GameObject>    _optBtnList = new List<GameObject>();
     private Text                _debugText;
     
-    [SerializeField]
-    private GameObject          _assetObject;
+    public struct activeFolioData {
+        public AssetBundle  folioActive;
+        public string[]     folioAssetNames;
+        public GameObject   assetActive;
+    }
+
+    public static event Action<activeFolioData> activeFolio = delegate{};
 
     void Awake() {
         // What platform are we on
@@ -30,9 +36,7 @@ public class ListFolios : MonoBehaviour {
             Directory.CreateDirectory(_path);       
             return;                                 // dont need to continue
         }
-        
-        _debugText = transform.parent.GetChild(0).gameObject.GetComponent<Text>();
-
+    
         checkFolios(_path);
         drawButtons();
     }
@@ -60,24 +64,15 @@ public class ListFolios : MonoBehaviour {
         }
     }
 
-    private void openFolio() {
+    private void unpackAssets() {
         if(_folioList.Count == 0) return;                                       // there is nothing to load
 
-        folioActive = AssetBundle.LoadFromFile(_folioList[0]);                  // make this open last known folio
-        folioAssets = folioActive.GetAllAssetNames();                           // store contents in array
-        assetActive = folioActive.LoadAsset(folioAssets[0]);        // load first asset
-        
-        GameObject _testFrame = (GameObject)Resources.Load("Prefabs/testFrame");
+        activeFolioData _newData = new activeFolioData() {
+            folioActive = AssetBundle.LoadFromFile(_folioList[0]),              // make this open last known folio
+            folioAssetNames = folioActive.GetAllAssetNames(),                   // store contents in array
+            assetActive = (GameObject)folioActive.LoadAsset(folioAssets[0])     // load first asset
+        };
 
-        _debugText.GetComponent<Text>().text = $"Opened {_folioList[0]}";
-
-        if(assetActive.GetType() == typeof(Texture2D)) {                        // png or jpg
-			Mesh _newMesh = _testFrame.GetComponent<MeshFilter>().sharedMesh;		// assign mesh as the frame's mesh
-			Texture2D _newTex  = (Texture2D)assetActive;						// convert to Texture2D and assign it
-			
-			_assetObject.GetComponent<MeshFilter>().mesh = _newMesh;	// pass it over to the controller
-			_assetObject.GetComponent<MeshRenderer>().material.SetTexture("_myTexture", _newTex);		// pass it 
-		}
-
+        activeFolio(_newData);
     }
 }
