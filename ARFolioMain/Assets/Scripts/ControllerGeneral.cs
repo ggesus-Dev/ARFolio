@@ -5,9 +5,6 @@ using System;
 using System.IO;
 
 public class ControllerGeneral : MonoBehaviour {
-    public  AssetBundle     folioToActivate;                                    // what bundle do we want to show
-    public  GameObject      assetActive;                                        // what asset from the bundle is active
-    public  string[]        folioAssetNames;                                    // array of asset names from bundle
     public  List<string>    folioList = new List<string>();                     // list of all avaiable bundles
     private string          _path = "Assets/Folios/";
 
@@ -49,10 +46,14 @@ public class ControllerGeneral : MonoBehaviour {
     private void sendFolioData() {
         if(folioList.Count == 0) return;                                        // there is nothing to load
 
+        AssetBundle _folioToActivate = AssetBundle.LoadFromFile(folioList[0]);  // what bundle we want to show
+        string[] _folioAssetNames = _folioToActivate.GetAllAssetNames();        // what asset from the bundle we want to show
+        GameObject _assetActive = _folioToActivate.LoadAsset(_folioAssetNames[0]) as GameObject;  // array of asset names found in bundle
+
         activeFolioData _newData = new activeFolioData() {                      // create new struct
-            folioActive = AssetBundle.LoadFromFile(folioList[0]),               // make this open last known folio
-            folioAssetNames = folioToActivate.GetAllAssetNames(),               // store contents in array
-            assetActive = (GameObject)folioToActivate.LoadAsset(folioAssetNames[0]) // load first asset
+            folioActive = _folioToActivate,                                     // make this open last known folio
+            folioAssetNames = _folioAssetNames,                                 // store contents in array
+            assetActive = _assetActive                                          // load first asset
         };
 
         activeFolio(_newData);
