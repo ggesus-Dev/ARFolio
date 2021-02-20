@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasController : MonoBehaviour {
+public class ControllerCanvas : MonoBehaviour {
     public Vector2 screenRes;
     private GameObject _mySelectionView = null;
     private GameObject _debugText;
@@ -12,7 +12,7 @@ public class CanvasController : MonoBehaviour {
     private void Awake() {
         screenRes = new Vector2(Screen.width, Screen.height);
         _debugText = transform.GetChild(0).gameObject;
-        SwipeController.onSwipe += swipeControllerOnSwipe;
+        ControllerSwipe.onSwipe += swipeControllerOnSwipe;
     }
 
     # if UNITY_EDITOR
@@ -26,25 +26,25 @@ public class CanvasController : MonoBehaviour {
     }
     # endif
 
-    private void swipeControllerOnSwipe(SwipeController.SwipeData data) {
+    private void swipeControllerOnSwipe(ControllerSwipe.SwipeData data) {
         switch(data.direction) {
-            case SwipeController.SwipeDirection.UP: 
+            case ControllerSwipe.SwipeDirection.UP: 
                 // start to swipe up within the lower third of the screen 
                 if(data.startPosition.y < screenRes.y / 3) {
                     selectionController(true);
                     _debugText.GetComponent<Text>().text += "\nSWIPE UP";
                 }
                 break;
-            case SwipeController.SwipeDirection.DOWN: 
+            case ControllerSwipe.SwipeDirection.DOWN: 
                 // start to swipe above 
                 if(data.startPosition.y > screenRes.y / 3) {
                     selectionController(false);
                     _debugText.GetComponent<Text>().text += "\nDOWN";
                 }
                 break;
-            case SwipeController.SwipeDirection.LEFT: 
+            case ControllerSwipe.SwipeDirection.LEFT: 
                 break;
-            case SwipeController.SwipeDirection.RIGHT: 
+            case ControllerSwipe.SwipeDirection.RIGHT: 
                 break;
         }
     }

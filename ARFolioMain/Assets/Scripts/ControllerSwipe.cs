@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class SwipeController : MonoBehaviour {
+public class ControllerSwipe : MonoBehaviour {
     [SerializeField]
     private float _minDistance = 300f;
     [SerializeField]
