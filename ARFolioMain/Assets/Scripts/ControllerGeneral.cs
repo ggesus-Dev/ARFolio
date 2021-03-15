@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
@@ -29,21 +28,24 @@ public class ControllerGeneral : MonoBehaviour {
             return;                                                             // dont need to continue
         } 
         
-        checkFolios();    
-        sendFolioData(); 
+        CheckFolios();    
+        SendFolioData(); 
     }
 
-    public void checkFolios() {                                                 // Check for available bundles and add them to our list
+    public void CheckFolios() {                                                 // Check for available bundles and add them to our list
         string[] _files = Directory.GetFiles(_path);                            // Temp array for getting file names
         folioList.Clear();                                                      // clear for if need to redraw
 
         for(int i = 0; i < _files.Length; i++) {
-            if(_files[i].EndsWith(".fd")) 
-                folioList.Add(_files[i]);
+            if(HandleFileCheck(_files[i])) folioList.Add(_files[i]);            // check to see if file is one of ours
         }
     }
 
-    private void sendFolioData() {
+    private bool HandleFileCheck(string file) {
+        return (file.EndsWith(".fd")) ? true : false;                           // may extend this in the future to validate if it's one of our bundles
+    }
+
+    private void SendFolioData() {
         if(folioList.Count == 0) return;                                        // there is nothing to load
 
         AssetBundle _folioToActivate = AssetBundle.LoadFromFile(folioList[0]);  // what bundle we want to show
