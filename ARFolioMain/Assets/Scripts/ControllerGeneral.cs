@@ -13,7 +13,7 @@ public class ControllerGeneral : MonoBehaviour {
         public GameObject   assetActive;
     }
 
-    public static event Action<activeFolioData> activeFolio = delegate{};    
+    public static event Action<activeFolioData> ActiveFolio = delegate{};    
 
     private void Awake() {
         switch(Application.platform) {                                          // What platform are we on
@@ -58,6 +58,6 @@ public class ControllerGeneral : MonoBehaviour {
             assetActive = _assetActive                                          // load first asset
         };
 
-        activeFolio(_newData);
+        ActiveFolio(_newData);
     }
 }
