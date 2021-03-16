@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AssetShowing : MonoBehaviour {
     void Awake() {
-        ControllerGeneral.activeFolio += setupAsset;
+        ControllerGeneral.ActiveFolio += SetupAsset;
         Debug.Log("bro");
     }
 
-    private void setupAsset(ControllerGeneral.activeFolioData data) {
+    private void SetupAsset(ControllerGeneral.activeFolioData data) {
         var _activeFolio = data.folioActive;
         var _assetNames = data.folioAssetNames;
         var _activeAsset = data.assetActive;
@@ -17,11 +17,11 @@ public class AssetShowing : MonoBehaviour {
 
         if(_activeAsset.GetType() == typeof(GameObject)) {
             Debug.Log("Type of image");
-            setupAsImage(_activeAsset);
+            SetupAsImage(_activeAsset);
         }
     }
 
-    private void setupAsImage(GameObject activeAsset) {
+    private void SetupAsImage(GameObject activeAsset) {
         GameObject _testFrame = (GameObject)Resources.Load("Prefabs/testFrame");
         Mesh _newMesh = _testFrame.GetComponent<MeshFilter>().sharedMesh;		// assign mesh as the frame's mesh
         

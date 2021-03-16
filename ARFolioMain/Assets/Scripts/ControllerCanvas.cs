@@ -10,7 +10,7 @@ public class ControllerCanvas : MonoBehaviour {
     private void Awake() {
         screenRes = new Vector2(Screen.width, Screen.height);                       // get screen information
         _debugText = transform.GetChild(0).gameObject;                              // get reference to debug text
-        ControllerSwipe.onSwipe += OnSwipeController;
+        ControllerSwipe.OnSwipe += OnSwipeController;
     }
 
     // Mouse Click input option if in editor

@@ -9,13 +9,13 @@ public class ListFolios : MonoBehaviour {
     
     void Start() {
         var _controller = transform.parent.transform.parent;
-        _controller.GetComponent<ControllerGeneral>().checkFolios();
+        _controller.GetComponent<ControllerGeneral>().CheckFolios();
         _folioList = _controller.GetComponent<ControllerGeneral>().folioList;
-        drawButtons();
+        DrawButtons();
     }
 
     // Draw buttons for each found folio
-    void drawButtons() {
+    void DrawButtons() {
         GameObject _btnPrefab = (GameObject)Resources.Load("Prefabs/BtnFolioOption");
         Transform _parent = gameObject.transform.GetChild(0).GetChild(0);
         _optBtnList.Clear();                                                                        // if need to redraw
